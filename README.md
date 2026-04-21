@@ -37,11 +37,16 @@ The following **additional** features are implemented:
 
 ## Video Walkthrough
 
-## Video Walkthrough
 
 Here's a walkthrough of implemented required features:
 
-[![Natalie's Creator Network Walkthrough](https://img.youtube.com/vi/1jg4UpjAhYo/maxresdefault.jpg)](https://youtu.be/1jg4UpjAhYo "Natalie's Creator Network Walkthrough")
+<img width="500" height="300" alt="Screenshot 2026-04-20 at 10 57 16 PM" src="https://github.com/user-attachments/assets/679de1f4-b3c7-427d-9992-e796cfb1f652" />
+
+<img width="500" height="300" alt="Screenshot 2026-04-20 at 11 00 01 PM" src="https://github.com/user-attachments/assets/69339985-96a4-4da5-b1d3-05fecb693c82" />
+
+
+
+[Natalie's Creator Network Walkthrough](https://youtu.be/1jg4UpjAhYo "Natalie's Creator Network Walkthrough")
 
 ## Notes
 
