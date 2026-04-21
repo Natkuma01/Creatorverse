@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import { useEffect, useState } from 'react'
 import { supabase } from "../client"
 
@@ -55,17 +55,19 @@ export function ViewCreator() {
                     <p className="text-xl leading-relaxed">{creator.description}</p>
                 </div>
 
-                {/* Clickable URL */}
-                <div className="mt-4">
+                <div className="flex flex-row m-4 gap-4 w-full">
                     <a 
                         href={creator.url} 
                         target="_blank" 
                         rel="noreferrer" 
-                        className="btn btn-outline btn-secondary w-full md:w-auto"
+                        className="btn btn-outline btn-secondary felx-1"
                     >
                         Visit Social Media / Portfolio
-                    </a>
-                </div>
+                    </a> </div>
+                    <Link to={`/edit/${id}`} className="flex-1"><button className="btn btn-outline btn-secondary mx-4">Edit</button>
+                
+                </Link>
+               
             </div>
         </div>
     )
