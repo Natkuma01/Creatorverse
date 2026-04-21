@@ -1,13 +1,7 @@
 import { Routes, Route, Link } from 'react-router-dom'
+import { ShowCreators } from './pages/ShowCreators'
+import { ViewCreator } from './pages/ViewCreator'
 
-function Home() {
-  return (
-    <div className="p-10">
-      <h1 className="text-4xl font-bold">Home Page</h1>
-      <button className="btn btn-primary mt-4">daisyUI Button</button>
-    </div>
-  )
-}
 
 export default function App() {
   return (
@@ -17,7 +11,8 @@ export default function App() {
       </nav>
       
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<ShowCreators />} />
+        <Route path="view/:id" element={ViewCreator} />
       </Routes>
     </div>
   )
