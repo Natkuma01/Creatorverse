@@ -1,11 +1,12 @@
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, useNavigate } from "react-router-dom" 
 import { useEffect, useState } from 'react'
 import { supabase } from "../client"
 
 export function ViewCreator() {
     const { id } = useParams()
+    const navigate = useNavigate() 
     const [creator, setCreator] = useState(null)
-    const [loading, setLoading] = useState(true) // Track loading state
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const fetchSingleCreator = async () => {
@@ -26,6 +27,26 @@ export function ViewCreator() {
 
         fetchSingleCreator()
     }, [id])
+
+
+    const deleteCreator = async () => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this creator?")
+        
+        if (confirmDelete) {
+            const { error } = await supabase
+                .from('creators')
+                .delete()
+                .eq('id', id)
+
+            if (error) {
+                console.error("Error deleting creator:", error.message)
+                alert("Could not delete creator.")
+            } else {
+                alert("Creator deleted successfully!")
+                navigate('/')
+            }
+        }
+    }
 
     if (loading) {
         return <div className="p-10 text-center text-2xl">Loading creator details...</div>
@@ -55,19 +76,30 @@ export function ViewCreator() {
                     <p className="text-xl leading-relaxed">{creator.description}</p>
                 </div>
 
-                <div className="flex flex-row m-4 gap-4 w-full">
+                {/* Updated Button Container */}
+                <div className="flex flex-col gap-3 mt-4">
                     <a 
                         href={creator.url} 
                         target="_blank" 
                         rel="noreferrer" 
-                        className="btn btn-outline btn-secondary felx-1"
+                        className="btn btn-secondary w-full"
                     >
                         Visit Social Media / Portfolio
-                    </a> </div>
-                    <Link to={`/edit/${id}`} className="flex-1"><button className="btn btn-outline btn-secondary mx-4">Edit</button>
-                
-                </Link>
-               
+                    </a>
+                    
+                    <div className="flex flex-row gap-3">
+                        <Link to={`/edit/${id}`} className="flex-1">
+                            <button className="btn btn-outline btn-accent w-full">Edit</button>
+                        </Link>
+
+                        <button 
+                            onClick={deleteCreator} 
+                            className="btn btn-outline btn-error flex-1"
+                        >
+                            Delete
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     )
