@@ -1,28 +1,41 @@
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { useEffect, useState } from 'react'
 import { supabase } from "../client"
 
-
-export function ViewCreator(){
+export function ViewCreator() {
     const { id } = useParams()
-    const navigate = useNavigate()
     const [creator, setCreator] = useState(null)
+    const [loading, setLoading] = useState(true) // Track loading state
 
     useEffect(() => {
         const fetchSingleCreator = async () => {
-            const {data, error} = await supabase.from('creators').select('*').eq('id', id).single()
+            setLoading(true)
+            const { data, error } = await supabase
+                .from('creators')
+                .select('*')
+                .eq('id', id)
+                .single()
         
-        if (error || !data) {
-            navigate('/error')
-        } else {
-            setCreator(data)
+            if (error) {
+                console.error("Error fetching creator:", error.message)
+            } else {
+                setCreator(data)
+            }
+            setLoading(false)
         }
-        }
+
         fetchSingleCreator()
-    }, [id, navigate])
+    }, [id])
 
+    if (loading) {
+        return <div className="p-10 text-center text-2xl">Loading creator details...</div>
+    }
 
-    return(
+    if (!creator) {
+        return <div className="p-10 text-center text-2xl">Creator not found.</div>
+    }
+
+    return (
        <div className="flex flex-col md:flex-row gap-10 m-10 items-start">
             {/* Left Column: Image */}
             <div className="flex-1 w-full">
